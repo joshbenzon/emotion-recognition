@@ -1,8 +1,7 @@
 """
-Final Project - Inside Out
+Project 4 - CNNs
 CS1430 - Computer Vision
 Brown University
-
 """
 
 """
@@ -53,4 +52,4 @@ batch_size = 10
 """
 The number of image scene classes. Don't change this.
 """
-num_classes = 15
+num_classes = 7

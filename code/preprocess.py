@@ -1,5 +1,5 @@
 """
-Final Project - Inside Out
+Project 4 - CNNs
 CS1430 - Computer Vision
 Brown University
 """
@@ -13,16 +13,16 @@ import tensorflow as tf
 import hyperparameters as hp
 
 
-class Datasets:
+class Datasets():
     """ Class for containing the training and test sets as well as
     other useful data-related information. Contains the functions
     for preprocessing.
     """
 
-    def __init__(self, data_path):  # removed "task"
+    def __init__(self, data_path, task):
 
         self.data_path = data_path
-        # self.task = task
+        self.task = task
 
         # Dictionaries for (label index) <--> (class name)
         self.idx_to_class = {}
@@ -38,9 +38,9 @@ class Datasets:
 
         # Setup data generators
         self.train_data = self.get_data(
-            os.path.join(self.data_path, "train/"), True, True)   # removed "task"
+            os.path.join(self.data_path, "train/"), task == '3', True, True)
         self.test_data = self.get_data(
-            os.path.join(self.data_path, "test/"), False, False)   # removed "task"
+            os.path.join(self.data_path, "test/"), task == '3', False, False)
 
     def calc_mean_and_std(self):
         """ Calculate mean and standard deviation of a sample of the
@@ -58,7 +58,7 @@ class Datasets:
                 if name.endswith(".jpg"):
                     file_list.append(os.path.join(root, name))
 
-        # Shuffle file paths
+        # Shuffle filepaths
         random.shuffle(file_list)
 
         # Take sample of file paths
@@ -86,7 +86,6 @@ class Datasets:
         #       self.mean and self.std respectively.
         # ==========================================================
 
-        # pixel-wise --> for each first 3 dimensions (number of images, height, width)
         self.mean = np.mean(data_sample, axis=(0, 1, 2))
         self.std = np.std(data_sample, axis=(0, 1, 2))
 
@@ -112,29 +111,31 @@ class Datasets:
         #       that were calculated in calc_mean_and_std() to perform
         #       the standardization.
         # =============================================================
-        img = (img - self.mean) / self.std
+
         # =============================================================
+
+        img = (img - self.mean) / self.std
+
         return img
 
     def preprocess_fn(self, img):
         """ Preprocess function for ImageDataGenerator. """
 
-        # if self.task == '3':
-        #     img = tf.keras.applications.vgg16.preprocess_input(img)
-        # else:
-
-        img = img / 255.
-        img = self.standardize(img)
+        if self.task == '3':
+            img = tf.keras.applications.vgg16.preprocess_input(img)
+        else:
+            img = img / 255.
+            img = self.standardize(img)
         return img
 
-    # def custom_preprocess_fn(self, img):
-    #     """ Custom preprocess function for ImageDataGenerator. """
-    #
-    #     if self.task == '3':
-    #         img = tf.keras.applications.vgg16.preprocess_input(img)
-    #     else:
-    #         img = img / 255.
-    #         img = self.standardize(img)
+    def custom_preprocess_fn(self, img):
+        """ Custom preprocess function for ImageDataGenerator. """
+
+        if self.task == '3':
+            img = tf.keras.applications.vgg16.preprocess_input(img)
+        else:
+            img = img / 255.
+            img = self.standardize(img)
 
         # EXTRA CREDIT:
         # Write your own custom data augmentation procedure, creating
@@ -146,23 +147,23 @@ class Datasets:
         # that ImageDataGenerator uses *this* function for preprocessing
         # on augmented data.
 
-        # if random.random() < 0.3:
-        #     img = img + tf.random.uniform(
-        #         (hp.img_size, hp.img_size, 1),
-        #         minval=-0.1,
-        #         maxval=0.1)
-        #
-        # return img
+        if random.random() < 0.3:
+            img = img + tf.random.uniform(
+                (hp.img_size, hp.img_size, 1),
+                minval=-0.1,
+                maxval=0.1)
 
-    def get_data(self, path, shuffle, augment):  # removed "is_vgg"
+        return img
+
+    def get_data(self, path, is_vgg, shuffle, augment):
         """ Returns an image data generator which can be iterated
         through for images and corresponding class labels.
 
         Arguments:
             path - Filepath of the data being imported, such as
                    "../data/train" or "../data/test"
-            # is_vgg - Boolean value indicating whether VGG preprocessing
-            #          should be applied to the images.
+            is_vgg - Boolean value indicating whether VGG preprocessing
+                     should be applied to the images.
             shuffle - Boolean value indicating whether the data should
                       be randomly shuffled.
             augment - Boolean value indicating whether the data should
@@ -183,16 +184,21 @@ class Datasets:
             #
             # ============================================================
 
-            data_gen = tf.keras.preprocessing.image.ImageDataGenerator(brightness_range=[0.2, 1.2], horizontal_flip=True, width_shift_range=0.2, height_shift_range=0.2, preprocessing_function=self.preprocess_fn)
+            data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
+                preprocessing_function=self.preprocess_fn,
+                rotation_range=20,
+                width_shift_range=0.2,
+                height_shift_range=0.2,
+                horizontal_flip=True)
 
             # ============================================================
         else:
             # Don't modify this
-            data_gen = tf.keras.preprocessing.image.ImageDataGenerator(preprocessing_function=self.preprocess_fn)
+            data_gen = tf.keras.preprocessing.image.ImageDataGenerator(
+                preprocessing_function=self.preprocess_fn)
 
         # VGG must take images of size 224x224
-        # img_size = 224 if is_vgg else \
-        img_size = hp.img_size
+        img_size = 224 if is_vgg else hp.img_size
 
         classes_for_flow = None
 
@@ -218,7 +224,9 @@ class Datasets:
 
             for img_class in unordered_classes:
                 self.idx_to_class[data_gen.class_indices[img_class]] = img_class
-                self.class_to_idx[img_class] = int(data_gen.class_indices[img_class])
-                self.classes[int(data_gen.class_indices[img_class])] = img_class
+                self.class_to_idx[img_class] = int(
+                    data_gen.class_indices[img_class])
+                self.classes[int(
+                    data_gen.class_indices[img_class])] = img_class
 
         return data_gen
