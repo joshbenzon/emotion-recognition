@@ -60,8 +60,8 @@ class YourModel(tf.keras.Model):
             MaxPool2D(3, 2),
 
             # Block 2
-            Conv2D(128, 9, 5, activation='relu'),
-            Conv2D(128, 9, 5, activation='relu'),
+            Conv2D(128, 5, 3, activation='relu'),
+            Conv2D(128, 5, 3, activation='relu'),
             MaxPool2D(3, 2),
 
             # Block 3
