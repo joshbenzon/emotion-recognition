@@ -55,45 +55,40 @@ class YourModel(tf.keras.Model):
 
         self.architecture = [
             # Block 1
-            Conv2D(64, 3, 1, padding="same",
-                   activation="relu", name="block1_conv1"),
-            Conv2D(64, 3, 1, padding="same",
-                   activation="relu", name="block1_conv2"),
-            MaxPool2D(2, name="block1_pool"),
+            Conv2D(96, 11, 4, activation='relu'),
+            Conv2D(96, 11, 4, activation='relu'),
+            MaxPool2D(3, 2),
+
             # Block 2
-            Conv2D(128, 3, 1, padding="same",
-                   activation="relu", name="block2_conv1"),
-            Conv2D(128, 3, 1, padding="same",
-                   activation="relu", name="block2_conv2"),
-            MaxPool2D(2, name="block2_pool"),
+            Conv2D(128, 9, 5, activation='relu'),
+            Conv2D(128, 9, 5, activation='relu'),
+            MaxPool2D(3, 2),
+
             # Block 3
-            Conv2D(256, 3, 1, padding="same",
-                   activation="relu", name="block3_conv1"),
-            Conv2D(256, 3, 1, padding="same",
-                   activation="relu", name="block3_conv2"),
-            Conv2D(256, 3, 1, padding="same",
-                   activation="relu", name="block3_conv3"),
-            MaxPool2D(2, name="block3_pool"),
+            Conv2D(128, 5, 3, activation='relu'),
+            Conv2D(128, 5, 3, activation='relu'),
+            MaxPool2D(3, 2),
+
             # Block 4
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block4_conv1"),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block4_conv2"),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block4_conv3"),
-            MaxPool2D(2, name="block4_pool"),
+            Conv2D(256, 3, 1, activation='relu'),
+            Conv2D(256, 3, 1, activation='relu'),
+            Conv2D(196, 3, 1, activation='relu'),
+            MaxPool2D(3, 2),
+
             # Block 5
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv1"),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv2"),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv3"),
-            MaxPool2D(2, name="block5_pool"),
-            Dropout(rate=0.4),
+            Conv2D(512, 3, 1, activation='relu'),
+            Conv2D(512, 3, 1, activation='relu'),
+            Conv2D(512, 3, 1, activation='relu'),
+            Conv2D(384, 3, 1, activation='relu'),
+            MaxPool2D(3, 2),
+
+            # Head
             Flatten(),
-            Dense(units=128, activation='relu'),
-            Dense(units=7, activation='softmax')
+            Dense(4096, activation='relu'),
+            Dropout(0.5),
+            Dense(4096, activation='relu'),
+            Dropout(0.5),
+            Dense(hp.num_classes, activation='softmax')
         ]
 
     def call(self, x):
