@@ -179,7 +179,6 @@ class VGGModel(tf.keras.Model):
         # TODO: Write a classification head for our 15-scene classification task.
 
         self.head = [
-            Dropout(0.3),
             Flatten(),
             Dense(4096, activation='relu'),
             Dropout(0.5),
