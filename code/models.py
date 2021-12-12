@@ -6,7 +6,7 @@ Brown University
 
 import tensorflow as tf
 from tensorflow.keras.layers import \
-    Conv2D, MaxPool2D, Dropout, Flatten, Dense
+    Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D
 
 import hyperparameters as hp
 
@@ -55,38 +55,51 @@ class YourModel(tf.keras.Model):
 
         self.architecture = [
             # Block 1
+            ZeroPadding2D((1, 1), input_shape=(48, 48, 1)),
             Conv2D(64, 3, 1, padding="same",
                    activation="relu", name="block1_conv1"),
+            ZeroPadding2D((1, 1)),
             Conv2D(64, 3, 1, padding="same",
                    activation="relu", name="block1_conv2"),
             MaxPool2D(2, name="block1_pool"),
             # Block 2
+            ZeroPadding2D((1, 1)),
             Conv2D(128, 3, 1, padding="same",
                    activation="relu", name="block2_conv1"),
+            ZeroPadding2D((1, 1)),
             Conv2D(128, 3, 1, padding="same",
                    activation="relu", name="block2_conv2"),
             MaxPool2D(2, name="block2_pool"),
             # Block 3
+            ZeroPadding2D((1, 1)),
             Conv2D(256, 3, 1, padding="same",
                    activation="relu", name="block3_conv1"),
+            ZeroPadding2D((1, 1)),
             Conv2D(256, 3, 1, padding="same",
                    activation="relu", name="block3_conv2"),
+            ZeroPadding2D((1, 1)),
             Conv2D(256, 3, 1, padding="same",
                    activation="relu", name="block3_conv3"),
             MaxPool2D(2, name="block3_pool"),
             # Block 4
+            ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block4_conv1"),
+            ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block4_conv2"),
+            ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block4_conv3"),
             MaxPool2D(2, name="block4_pool"),
             # Block 5
+            ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block5_conv1"),
+            ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block5_conv2"),
+            ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block5_conv3"),
             MaxPool2D(2, name="block5_pool"),

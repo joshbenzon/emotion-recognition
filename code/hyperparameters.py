@@ -27,7 +27,7 @@ momentum = 0.01
 Resize image size for task 1. Task 3 must have an image size of 224,
 so that is hard-coded elsewhere.
 """
-img_size = 224
+img_size = 48
 
 """
 Sample size for calculating the mean and standard deviation of the
@@ -47,7 +47,7 @@ max_num_weights = 5
 Defines the number of training examples per batch.
 You don't need to modify this.
 """
-batch_size = 10
+batch_size = 32
 
 """
 The number of image scene classes. Don't change this.
