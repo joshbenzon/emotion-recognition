@@ -198,7 +198,7 @@ def main():
 
     if ARGS.task == '1':
         model = YourModel()
-        model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 1)))
+        model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
             "your_model" + os.sep + timestamp + os.sep
         logs_path = "logs" + os.sep + "your_model" + \
