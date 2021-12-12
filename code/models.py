@@ -119,7 +119,7 @@ class YourModel(tf.keras.Model):
         #     Dense(hp.num_classes, activation='softmax')
         # ]
 
-        #Version 2
+        # Version 2
         c1 = Conv2D(32, 3, 1, padding="same", activation="relu", name="C1")
         c2 = Conv2D(64, 3, 1, padding="same", activation="relu", name="C2")
         m3 = MaxPool2D(2, name="M3")
@@ -131,10 +131,11 @@ class YourModel(tf.keras.Model):
         d9 = Dropout(0.25, name="D9")
         f10 = Flatten(name="F10")
         d11 = Dense(units=100, activation="relu", name="D11")
-        d12 = Dropout(0.5, name="D12")
+       #  d12 = Dropout(0.5, name="D12")
         d13 = Dense(units=7, activation="softmax", name="D13")
 
-        self.architecture = [c1, c2, m3, d4, c5, m6, c7, m8, d9, f10, d11, d12, d13]
+        self.architecture = [c1, c2, m3, d4, c5,
+                             m6, c7, m8, d9, f10, d11, d12, d13]
 
     def call(self, x):
         """ Passes input image through the network. """
