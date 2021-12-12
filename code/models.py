@@ -61,7 +61,7 @@ class YourModel(tf.keras.Model):
             ZeroPadding2D((1, 1)),
             Conv2D(64, 3, 3,
                    activation="relu", name="block1_conv2"),
-            MaxPool2D(2, 2),
+            MaxPool2D((2, 2), strides=(2, 2)),
             # Block 2
             ZeroPadding2D((1, 1)),
             Conv2D(128, 3, 3,
@@ -69,7 +69,7 @@ class YourModel(tf.keras.Model):
             ZeroPadding2D((1, 1)),
             Conv2D(128, 3, 3,
                    activation="relu", name="block2_conv2"),
-            MaxPool2D(2, 2),
+            MaxPool2D((2, 2), strides=(2, 2)),
             # Block 3
             ZeroPadding2D((1, 1)),
             Conv2D(256, 3, 3,
@@ -80,7 +80,7 @@ class YourModel(tf.keras.Model):
             ZeroPadding2D((1, 1)),
             Conv2D(256, 3, 3,
                    activation="relu", name="block3_conv3"),
-            MaxPool2D(2, 2),
+            MaxPool2D((2, 2), strides=(2, 2)),
             # Block 4
             ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 3,
@@ -91,7 +91,7 @@ class YourModel(tf.keras.Model):
             ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 3,
                    activation="relu", name="block4_conv3"),
-            MaxPool2D(2, 2),
+            MaxPool2D((2, 2), strides=(2, 2)),
             # Block 5
             ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 3,
@@ -102,7 +102,7 @@ class YourModel(tf.keras.Model):
             ZeroPadding2D((1, 1)),
             Conv2D(512, 3, 3,
                    activation="relu", name="block5_conv3"),
-            MaxPool2D(2, 2),
+            MaxPool2D((2, 2), strides=(2, 2)),
 
             # Head
             Flatten(),
