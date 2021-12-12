@@ -16,7 +16,7 @@ A critical parameter that can dramatically affect whether training
 succeeds or fails. The value for this depends significantly on which
 optimizer is used. Refer to the default learning rate parameter
 """
-learning_rate = 1e-4
+learning_rate = 1e-5
 
 """
 Momentum on the gradient (if you use a momentum-based optimizer)
@@ -47,7 +47,7 @@ max_num_weights = 5
 Defines the number of training examples per batch.
 You don't need to modify this.
 """
-batch_size = 32
+batch_size = 10
 
 """
 The number of image scene classes. Don't change this.
