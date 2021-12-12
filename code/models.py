@@ -53,70 +53,88 @@ class YourModel(tf.keras.Model):
         #       Note: Flatten is a very useful layer. You shouldn't have to
         #             explicitly reshape any tensors anywhere in your network.
 
-        self.architecture = [
-            # Block 1
-            ZeroPadding2D((1, 1), input_shape=(48, 48, 1)),
-            Conv2D(64, 3, 1, padding="valid",
-                   activation="relu", name="block1_conv1"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(64, 3, 1, padding="valid",
-                   activation="relu", name="block1_conv2"),
-            MaxPool2D(pool_size=(2, 2),
-                      strides=(2, 2), padding='valid'),
-            # Block 2
-            ZeroPadding2D((1, 1)),
-            Conv2D(128, 3, 1, padding="valid",
-                   activation="relu", name="block2_conv1"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(128, 3, 1, padding="valid",
-                   activation="relu", name="block2_conv2"),
-            MaxPool2D(pool_size=(2, 2),
-                      strides=(2, 2), padding='valid'),
-            # Block 3
-            ZeroPadding2D((1, 1)),
-            Conv2D(256, 3, 1, padding="valid",
-                   activation="relu", name="block3_conv1"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(256, 3, 1, padding="valid",
-                   activation="relu", name="block3_conv2"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(256, 3, 1, padding="valid",
-                   activation="relu", name="block3_conv3"),
-            MaxPool2D(pool_size=(2, 2),
-                      strides=(2, 2), padding='valid'),
-            # Block 4
-            ZeroPadding2D((1, 1)),
-            Conv2D(512, 3, 1, padding="valid",
-                   activation="relu", name="block4_conv1"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(512, 3, 1, padding="valid",
-                   activation="relu", name="block4_conv2"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(512, 3, 1, padding="valid",
-                   activation="relu", name="block4_conv3"),
-            MaxPool2D(pool_size=(2, 2),
-                      strides=(2, 2), padding='valid'),
-            # Block 5
-            ZeroPadding2D((1, 1)),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv1"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv2"),
-            ZeroPadding2D((1, 1)),
-            Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv3"),
-            MaxPool2D(pool_size=(2, 2),
-                      strides=(2, 2), padding='valid'),
+        # Version #1
+        # self.architecture = [
+        #     # Block 1
+        #     ZeroPadding2D((1, 1), input_shape=(48, 48, 1)),
+        #     Conv2D(64, 3, 1, padding="valid",
+        #            activation="relu", name="block1_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(64, 3, 1, padding="valid",
+        #            activation="relu", name="block1_conv2"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 2
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(128, 3, 1, padding="valid",
+        #            activation="relu", name="block2_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(128, 3, 1, padding="valid",
+        #            activation="relu", name="block2_conv2"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 3
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(256, 3, 1, padding="valid",
+        #            activation="relu", name="block3_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(256, 3, 1, padding="valid",
+        #            activation="relu", name="block3_conv2"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(256, 3, 1, padding="valid",
+        #            activation="relu", name="block3_conv3"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 4
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(512, 3, 1, padding="valid",
+        #            activation="relu", name="block4_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(512, 3, 1, padding="valid",
+        #            activation="relu", name="block4_conv2"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(512, 3, 1, padding="valid",
+        #            activation="relu", name="block4_conv3"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 5
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(512, 3, 1, padding="same",
+        #            activation="relu", name="block5_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(512, 3, 1, padding="same",
+        #            activation="relu", name="block5_conv2"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(512, 3, 1, padding="same",
+        #            activation="relu", name="block5_conv3"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #
+        #     # Head
+        #     Flatten(),
+        #     Dense(4096, activation='relu'),
+        #     Dropout(0.5),
+        #     Dense(4096, activation='relu'),
+        #     Dropout(0.5),
+        #     Dense(hp.num_classes, activation='softmax')
+        # ]
 
-            # Head
-            Flatten(),
-            Dense(4096, activation='relu'),
-            Dropout(0.5),
-            Dense(4096, activation='relu'),
-            Dropout(0.5),
-            Dense(hp.num_classes, activation='softmax')
-        ]
+        #Version 2
+        c1 = Conv2D(32, 3, 1, padding="same", activation="relu", name="C1")
+        c2 = Conv2D(64, 3, 1, padding="same", activation="relu", name="C2")
+        m3 = MaxPool2D(2, name="M3")
+        d4 = Dropout(0.25, name="D4")
+        c5 = Conv2D(128, 3, 1, padding="same", activation="relu", name="C5")
+        m6 = MaxPool2D(2, name="M6")
+        c7 = Conv2D(128, 3, 1, padding="same", activation="relu", name="C7")
+        m8 = MaxPool2D(2, name="M8")
+        d9 = Dropout(0.25, name="D9")
+        f10 = Flatten(name="F10")
+        d11 = Dense(units=100, activation="relu", name="D11")
+        d12 = Dropout(0.5, name="D12")
+        d13 = Dense(units=7, activation="softmax", name="D13")
+
+        self.architecture = [c1, c2, m3, d4, c5, m6, c7, m8, d9, f10, d11, d12, d13]
 
     def call(self, x):
         """ Passes input image through the network. """
