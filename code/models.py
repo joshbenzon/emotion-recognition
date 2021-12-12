@@ -135,7 +135,7 @@ class YourModel(tf.keras.Model):
         d13 = Dense(units=7, activation="softmax", name="D13")
 
         self.architecture = [c1, c2, m3, d4, c5,
-                             m6, c7, m8, d9, f10, d11, d12, d13]
+                             m6, c7, m8, d9, f10, d11, d13]
 
     def call(self, x):
         """ Passes input image through the network. """
