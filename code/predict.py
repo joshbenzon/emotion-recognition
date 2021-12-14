@@ -70,7 +70,7 @@ def predict_image(path):
     result = list(result[0])
 
     print(result, "~result~")
-    print(result.shape, "~result shape~")
+    print(len(result), "~result shape~")
 
     img_index = result.index(max(result))
     print(label_dict[img_index], '~label~')
