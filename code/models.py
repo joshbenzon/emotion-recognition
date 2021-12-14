@@ -219,7 +219,7 @@ class VGGModel(tf.keras.Model):
             Dropout(rate=0.3),
             Flatten(),
             Dense(units=128, activation='relu'),
-            Dense(units=15, activation='softmax')
+            Dense(units=7, activation='softmax')
         ]
 
         # Don't change the below:
