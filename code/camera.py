@@ -13,3 +13,10 @@ while(True):
         break
 
 cap.release()
+
+
+def takePicture():
+    pass
+
+
+takePicture()
