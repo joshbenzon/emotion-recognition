@@ -251,33 +251,10 @@ class VGGModel(tf.keras.Model):
         # TODO: Write a classification head for our 15-scene classification task.
 
         self.head = [
-            
-        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        MaxPool2D(pool_size = 2,strides = 2),
-        BatchNormalization(),
-
-        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        MaxPool2D(pool_size = 2,strides = 2),
-        BatchNormalization(),
-        Dropout(0.25),
-
-        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        MaxPool2D(pool_size = 2,strides = 2),
-        BatchNormalization(),
-        Dropout(0.25),
-
-        Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        MaxPool2D(pool_size = 2,strides = 2),
-        BatchNormalization(),
-
-        Flatten(),
-        Dense(units = 128,activation = 'relu',kernel_initializer='he_normal'),
-        Dropout(0.25),
-        Dense(units = 64,activation = 'relu',kernel_initializer='he_normal'),
-        BatchNormalization(),
-        Dropout(0.25),
-        Dense(units = 32,activation = 'relu',kernel_initializer='he_normal'),
-        Dense(7,activation = 'softmax')
+            Flatten(data_format=None), 
+        Dropout(0.4), 
+        Dense(units=100, activation='relu'), 
+        Dense(units=15, activation='softmax')
         ]
         
 
