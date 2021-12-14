@@ -2,8 +2,8 @@ import tensorflow as tf
 import numpy as np
 from models import YourModel, VGGModel
 import hyperparameters as hp
-from tf.keras.layers import \
-    Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
+
+
 def create_model():
     model = VGGModel()
     model(tf.keras.Input(shape=(224, 224, 3)))
