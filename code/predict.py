@@ -5,7 +5,7 @@ import hyperparameters as hp
 
 def predict_image(path):
     model = VGGModel
-    img = tf.keras.preprocessing.image.load_img(path)
+    img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", target_size=(48, 48))
     print("loaded image in yay")
 
     label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
