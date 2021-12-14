@@ -14,7 +14,7 @@ def predict_image(model, path):
     # model.save_weights("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # print(model)
 
-    img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale = True, target_size=(48, 48))
+    img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale=True, target_size=(48, 48))
 
     #predictions = model(img)
 
@@ -33,7 +33,7 @@ def predict_image(model, path):
     # img = np.array(img)
     print("we reshaped")
 
-    result = model.predict(img) #same as model(img) or model.call()
+    result = model.predict(img)  # same as model(img) or model.call()
 
     result = list(result[0])
 
