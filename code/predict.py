@@ -5,19 +5,20 @@ import hyperparameters as hp
 
 def predict_image(path):
     model = VGGModel
-    img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", target_size=(48, 48))
+    img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale = True, target_size=(48, 48))
     print("loaded image in yay")
 
     label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
     img = np.array(img)
-    img.shape[3] = 1
     print(img.shape)
 
     img = np.expand_dims(img, axis=0)
     print(img.shape)
     img = img.reshape(1, 48, 48, 1)
+    img = np.array(img)
+    print("we reshaped")
 
-    result = model.predict(img)
+    result = model.predict(x=img)
     result = list(result[0])
 
     print(result)
