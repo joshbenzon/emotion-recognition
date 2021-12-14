@@ -39,10 +39,11 @@ def create_model():
 
 
 def predict_image(path):  # removed model
-    model = VGGModel()
+    model = YourModel()
+
     # model = tf.keras.models.load_model('new_model')
 
-    model.head.load_weights("vgg.weights.e024-acc0.4742.h5")
+    model.load_weights("vgg.weights.e024-acc0.4742.h5")
 
     img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale=True, target_size=(48, 48))
 
