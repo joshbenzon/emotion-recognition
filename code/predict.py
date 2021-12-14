@@ -62,6 +62,8 @@ def predict_image(path):  # removed model
 
     result = list(result[0])
 
+    print(result)
+
     img_index = result.index(max(result))
     print(label_dict[img_index], '~label~')
 
