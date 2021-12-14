@@ -11,7 +11,7 @@ dname = os.path.dirname(abspath)
 os.chdir(dname)
 
 model = VGGModel()
-model.build(input_shape=(1, 48, 48, 1))
+model.build(input_shape=(3, 3, 1, 64))
 
 model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
