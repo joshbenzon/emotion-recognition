@@ -73,6 +73,7 @@ def detectEmotion(image_name):
     """
     takePicture(image_name)
     findFace(image_name)
-    # predict emotion using tf, return emotion
-    emotion = predict(image_name)
+    # Can't run the first line locally without tensorflow, so use second instead
+    # emotion = predict(image_name)
+    emotion = "Happy"
     return emotion

@@ -44,8 +44,8 @@ def predict(image_path):
     prediction_list = list(prediction[0])
     img_index = prediction_list.index(max(prediction_list))
 
-    print(label_dict[img_index] + " with " +
-          prediction_list[img_index] + " accuracy.")
+    print(str(label_dict[img_index]) + " with " +
+          str(prediction_list[img_index]) + " accuracy.")
 
     print("Finished!")
     return label_dict[img_index]
