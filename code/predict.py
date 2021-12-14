@@ -5,13 +5,15 @@ import hyperparameters as hp
 from tensorflow.keras.layers import \
     Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
 import os
+import numpy
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
 
 model = VGGModel()
-model.build(input_shape=(3, 3, 1, 64))
+
+model(np.zeros((1, 48, 48, 1)))
 
 model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
