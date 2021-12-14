@@ -8,7 +8,9 @@ from tensorflow.keras.layers import \
 
 def create_model():
     model = tf.keras.Sequential()
-    model.tf.keras.models.Model.build((48, 48, 1))
+
+    input_shape = (48, 48, 1)
+    model.build(input_shape)
 
     model.add(Conv2D(64, 3, 1, padding="same", activation="relu", name="block1_conv1"))
     model.add(Conv2D(64, 3, 1, padding="same", activation="relu", name="block1_conv2"))

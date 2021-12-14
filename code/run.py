@@ -189,7 +189,7 @@ def main():
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
 
     model.save('my_model.h5')
-    print("Sucess!")
+    print("Success!")
 
 
 # Make arguments global
