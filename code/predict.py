@@ -17,10 +17,13 @@ def predict_image(path):
     img = np.expand_dims(img, axis=0)
     print(img.shape)
     img = img.reshape(1, 48, 48, 1)
-    img = np.array(img)
+    # img = np.array(img)
     print("we reshaped")
 
     result = model.predict(img)
+
+    print("predick")
+
     result = list(result[0])
 
     print(result)
