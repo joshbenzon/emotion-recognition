@@ -9,9 +9,8 @@ def predict_image(path):
     print("loaded image in yay")
 
     label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
-
-    img = tf.image.rgb_to_grayscale(img)
     img = np.array(img)
+    img.shape[3] = 1
     print(img.shape)
 
     img = np.expand_dims(img, axis=0)
