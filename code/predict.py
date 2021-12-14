@@ -40,6 +40,7 @@ def create_model():
 
 def predict_image(path):  # removed model
     model = YourModel()
+    model.built = True
 
     # model = tf.keras.models.load_model('new_model')
 
