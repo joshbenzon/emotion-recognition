@@ -30,7 +30,7 @@ def create_model():
     model.add(MaxPool2D(2, name="block5_pool"))
     model.add(Dropout(rate=0.3))
     model.add(Flatten())
-    mdoel.add(Dense(units=128, activation='relu'))
+    model.add(Dense(units=128, activation='relu'))
     model.add(Dense(units=7, activation='softmax'))
 
     model.save('new_model')
