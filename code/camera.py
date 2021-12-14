@@ -18,13 +18,12 @@ def takePicture():
         # height = int(frame.shape[0])
         # cv2.resize(
         #     frame, (height, height), interpolation=cv2.INTER_AREA)
-        cap.set(3, 50)
         cv2.imshow("Frame", frame)
 
         key = cv2.waitKey(1)
         if key == 27:
             break
-        elif key == ord('p'):
+        elif key == ord('p') or key == ord(' '):
             cv2.imwrite("image.jpg", frame)
             break
 
@@ -35,7 +34,10 @@ def takePicture():
 
     # img = resize(img, (hp.img_size, hp.img_size))
 
+    # img.thumbnail((48, 48), Image.ANTIALIAS)
+
     # img = np.array(img)
+    # img = resize(img, (48, 48))
     # img = Image.fromarray(img)
     img.save("image.jpg")
 
