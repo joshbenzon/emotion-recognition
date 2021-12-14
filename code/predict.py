@@ -10,9 +10,9 @@ abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
 
-
 model = VGGModel()
-model.built = True
+model.build(input_shape=(1, 48, 48, 1))
+
 model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
     "checkpoints/vgg_model/121421-151746/vgg.weights.e018-acc0.5242.h5", by_name=False)
