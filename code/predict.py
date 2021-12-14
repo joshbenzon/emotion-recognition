@@ -48,4 +48,4 @@ print("Predicting Image...")
 prediction = model.predict(img_batch)
 
 print("Finished!")
-print("Prediction = " + prediction)
+print(prediction)
