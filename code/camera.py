@@ -1,22 +1,43 @@
 import cv2
-
-
-# video capture source camera (Here webcam of laptop)
-cap = cv2.VideoCapture(0)
-ret, frame = cap.read()  # return a single frame in variable `frame`
-
-while(True):
-    cv2.imshow('img1', frame)  # display the captured image
-    if cv2.waitKey(1) & 0xFF == ord('y'):  # save on pressing 'y'
-        cv2.imwrite('./code/c1.png', frame)
-        cv2.destroyAllWindows()
-        break
-
-cap.release()
+import os
+from PIL import Image
+import hyperparameters as hp
+import numpy as np
+from skimage.transform import rescale, resize
 
 
 def takePicture():
-    pass
+    abspath = os.path.abspath(__file__)
+    dname = os.path.dirname(abspath)
+    os.chdir(dname)
+
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        _, frame = cap.read()
+        # height = int(frame.shape[0])
+        # cv2.resize(
+        #     frame, (height, height), interpolation=cv2.INTER_AREA)
+        cap.set(3, 50)
+        cv2.imshow("Frame", frame)
+
+        key = cv2.waitKey(1)
+        if key == 27:
+            break
+        elif key == ord('p'):
+            cv2.imwrite("image.jpg", frame)
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+    img = Image.open("image.jpg").convert("L")
+
+    # img = resize(img, (hp.img_size, hp.img_size))
+
+    # img = np.array(img)
+    # img = Image.fromarray(img)
+    img.save("image.jpg")
 
 
 takePicture()
