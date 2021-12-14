@@ -10,7 +10,6 @@ def create_model():
 
     # Print summaries for both parts of the model
     model.vgg16.summary()
-    model.head.summary()
     return model
 
 def predict_image(path):
