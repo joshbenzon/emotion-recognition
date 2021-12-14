@@ -43,12 +43,18 @@ def predict_image(path):  # removed model
 
     # model = tf.keras.models.load_model('new_model')
 
-    input_shape = (1, 48, 48, 1)
-    model.build(input_shape)
+    # input_shape = (1, 48, 48, 1)
+    # model.build(input_shape)
+
     # model.built = True
 
     model.vgg16.load_weights("vgg16_imagenet.h5")
     model.head.load_weights("121321-205349/vgg.weights.e024-acc0.4742.h5")
+
+    model.compile(
+        optimizer=model.optimizer,
+        loss=model.loss_fn,
+        metrics=["sparse_categorical_accuracy"])
 
     img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale=True, target_size=(48, 48))
 
