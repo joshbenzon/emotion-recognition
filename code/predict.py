@@ -20,7 +20,7 @@ def predict_image(path):
     img = np.array(img)
     print("we reshaped")
 
-    result = model.predict(img)
+    result = VGGModel.predict(img)
     result = list(result[0])
 
     print(result)
