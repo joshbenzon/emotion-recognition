@@ -12,8 +12,9 @@ def predict_image(path):
 
     img = np.array(img)
     print(img.shape)
-    
+
     img = np.expand_dims(img, axis=0)
+    print(img.shape)
     img = img.reshape(1, 48, 48, 1)
 
     result = model.predict(img)
