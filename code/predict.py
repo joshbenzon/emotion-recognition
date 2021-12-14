@@ -33,8 +33,8 @@ from tensorflow.keras.layers import \
 
 
 def predict_image(path):  # removed model
-    # model = VGGModel()
-    model = tf.keras.models.load_model(VGGModel())
+    model = VGGModel()
+    # model = tf.keras.models.load_model('new_model')
     
     # model.load_weights("vgg.weights.e024-acc0.4742.h5")
     model.load_weights("vgg.weights.e024-acc0.4742.h5")
