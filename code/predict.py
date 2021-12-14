@@ -5,9 +5,6 @@ import hyperparameters as hp
 
 def predict_image(path):
     model = VGGModel
-    url = path
-    path = tf.keras.utils.get_file(fname="~happy~", origin=url)
-
     img = tf.keras.utils.load_img(path)
     
     label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
@@ -49,4 +46,4 @@ def predict_image(path):
     # print("This image msot loikely belongs to {} with a {:.2f} percent confidence."
     #       .format(class_names[np.argmax(score)], 100 * np.max(score)))
 
-predict_image("code\happy.jpg")
+predict_image("happy.jpg")
