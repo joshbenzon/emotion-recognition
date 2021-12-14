@@ -2,14 +2,42 @@ import tensorflow as tf
 import numpy as np
 from models import YourModel, VGGModel
 import hyperparameters as hp
+from tensorflow.keras.layers import \
+    Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
 
 
 def create_model():
-    model = VGGModel()
-    model(tf.keras.Input(shape=(224, 224, 3)))
-
-    # Print summaries for both parts of the model
-    model.vgg16.summary()
+    model = tf.keras.Sequential()
+    model.add(Conv2D(64, 3, 1, padding="same", activation="relu", name="block1_conv1"))
+    model.add(Conv2D(64, 3, 1, padding="same",
+                   activation="relu", name="block1_conv2"))
+    model.add(MaxPool2D(2, name="block1_pool"))
+    model.add(Conv2D(128, 3, 1, padding="same",
+                   activation="relu", name="block2_conv1"))
+    model.add(Conv2D(128, 3, 1, padding="same",
+                   activation="relu", name="block2_conv2"))
+    model.add(MaxPool2D(2, name="block2_pool"))
+    model.add(Conv2D(256, 3, 1, padding="same", activation="relu", name="block3_conv1"))
+    model.add(Conv2D(256, 3, 1, padding="same",
+                   activation="relu", name="block3_conv2"))
+    model.add(Conv2D(256, 3, 1, padding="same",
+                   activation="relu", name="block3_conv3"))
+    model.add(MaxPool2D(2, name="block3_pool"))
+    model.add(Conv2D(512, 3, 1, padding="same",
+                   activation="relu", name="block4_conv1"))
+    model.add(Conv2D(512, 3, 1, padding="same",
+                   activation="relu", name="block4_conv2"))
+    model.add(Conv2D(512, 3, 1, padding="same",
+                   activation="relu", name="block4_conv3"))
+    model.add(MaxPool2D(2, name="block4_pool"))
+    model.add(Conv2D(512, 3, 1, padding="same",
+                   activation="relu", name="block5_conv1"))
+    model.add(Conv2D(512, 3, 1, padding="same",
+                   activation="relu", name="block5_conv2"))
+    model.add(Conv2D(512, 3, 1, padding="same",
+                   activation="relu", name="block5_conv3"))
+    model.add(MaxPool2D(2, name="block5_pool"))
+    
     return model
 
 def predict_image(path):
