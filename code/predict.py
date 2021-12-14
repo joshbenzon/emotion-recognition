@@ -13,6 +13,9 @@ os.chdir(dname)
 
 model = VGGModel()
 
+model.vgg16.load_model("vgg.h5")
+model.head.load_model("head.h5")
+
 model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
     "checkpoints/vgg_model/121421-151746/vgg.weights.e018-acc0.5242.h5", by_name=False)
