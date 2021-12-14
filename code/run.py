@@ -188,7 +188,8 @@ def main():
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
 
-    model.save('my_model')
+    model.save('my_model.h5')
+    print("Sucess!")
 
 
 # Make arguments global
