@@ -2,9 +2,19 @@ import tensorflow as tf
 import numpy as np
 from models import YourModel, VGGModel
 import hyperparameters as hp
+from tf.keras.layers import \
+    Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
+def create_model():
+    model = VGGModel()
+    model(tf.keras.Input(shape=(224, 224, 3)))
+
+    # Print summaries for both parts of the model
+    model.vgg16.summary()
+    model.head.summary()
+    return model
 
 def predict_image(path):
-    model = VGGModel()
+    model = create_model()
     model.load_weights("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # model.save_weights("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # print(model)
