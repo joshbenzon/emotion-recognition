@@ -252,7 +252,7 @@ class VGGModel(tf.keras.Model):
 
         self.head = [
             
-        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1)),
+        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,-1)),
         MaxPool2D(pool_size = 2,strides = 2),
         BatchNormalization(),
 
