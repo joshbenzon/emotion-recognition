@@ -6,7 +6,11 @@ Brown University
 
 import tensorflow as tf
 from tensorflow.keras.layers import \
+<<<<<<< HEAD
     Conv2D, MaxPool2D, Dropout, Flatten, Dense
+=======
+    Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
+>>>>>>> b0890fd28073f952d31f8b8ebdbddd4711338ed9
 
 import hyperparameters as hp
 
@@ -53,6 +57,7 @@ class YourModel(tf.keras.Model):
         #       Note: Flatten is a very useful layer. You shouldn't have to
         #             explicitly reshape any tensors anywhere in your network.
 
+<<<<<<< HEAD
         self.architecture = [
             Conv2D(filters=108, kernel_size=(13, 13), padding='same',
                    strides=(4, 4), activation='relu'),
@@ -72,6 +77,126 @@ class YourModel(tf.keras.Model):
             Dense(units=128, activation='relu'),
             Dense(units=7, activation='softmax')
         ]
+=======
+        # Version #1
+        # self.architecture = [
+        #     # Block 1
+        #     ZeroPadding2D((1, 1), input_shape=(48, 48, 1)),
+        #     Conv2D(64, 3, 1, padding="valid",
+        #            activation="relu", name="block1_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(64, 3, 1, padding="valid",
+        #            activation="relu", name="block1_conv2"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 2
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(128, 3, 1, padding="valid",
+        #            activation="relu", name="block2_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(128, 3, 1, padding="valid",
+        #            activation="relu", name="block2_conv2"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 3
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(256, 3, 1, padding="valid",
+        #            activation="relu", name="block3_conv1"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(256, 3, 1, padding="valid",
+        #            activation="relu", name="block3_conv2"),
+        #     ZeroPadding2D((1, 1)),
+        #     Conv2D(256, 3, 1, padding="valid",
+        #            activation="relu", name="block3_conv3"),
+        #     MaxPool2D(pool_size=(2, 2),
+        #               strides=(2, 2), padding='valid'),
+        #     # Block 4
+        #     ZeroPadding2D((1, 1)),
+    #     #     Conv2D(512, 3, 1, padding="valid",
+    #     #            activation="relu", name="block4_conv1"),
+    #     #     ZeroPadding2D((1, 1)),
+    #     #     Conv2D(512, 3, 1, padding="valid",
+    #     #            activation="relu", name="block4_conv2"),
+    #     #     ZeroPadding2D((1, 1)),
+    #     #     Conv2D(512, 3, 1, padding="valid",
+    #     #            activation="relu", name="block4_conv3"),
+    #     #     MaxPool2D(pool_size=(2, 2),
+    #     #               strides=(2, 2), padding='valid'),
+    #     #     # Block 5
+    #     #     ZeroPadding2D((1, 1)),
+    #     #     Conv2D(512, 3, 1, padding="same",
+    #     #            activation="relu", name="block5_conv1"),
+    #     #     ZeroPadding2D((1, 1)),
+    #     #     Conv2D(512, 3, 1, padding="same",
+    #     #            activation="relu", name="block5_conv2"),
+    #     #     ZeroPadding2D((1, 1)),
+    #     #     Conv2D(512, 3, 1, padding="same",
+    #     #            activation="relu", name="block5_conv3"),
+    #     #     MaxPool2D(pool_size=(2, 2),
+    #     #               strides=(2, 2), padding='valid'),
+    #     #
+    #     #     # Head
+    #     #     Flatten(),
+    #     #     Dense(4096, activation='relu'),
+    #     #     Dropout(0.5),
+    #     #     Dense(4096, activation='relu'),
+    #     #     Dropout(0.5),
+    #     #     Dense(hp.num_classes, activation='softmax')
+    #     # ]
+
+    #     # Version 2
+    #     c1 = Conv2D(32, 3, 1, padding="same", activation="relu", name="C1")
+    #     c2 = Conv2D(64, 3, 1, padding="same", activation="relu", name="C2")
+    #     m3 = MaxPool2D(2, name="M3")
+    #     d4 = Dropout(0.25, name="D4")
+    #     c5 = Conv2D(128, 3, 1, padding="same", activation="relu", name="C5")
+    #     m6 = MaxPool2D(2, name="M6")
+    #     c7 = Conv2D(128, 3, 1, padding="same", activation="relu", name="C7")
+    #     m8 = MaxPool2D(2, name="M8")
+    #     d9 = Dropout(0.25, name="D9")
+    #     f10 = Flatten(name="F10")
+    #     d11 = Dense(units=100, activation="relu", name="D11")
+    #    #  d12 = Dropout(0.5, name="D12")
+    #     d13 = Dense(units=7, activation="softmax", name="D13")
+
+    #     self.architecture = [c1, c2, m3, d4, c5,
+    #                          m6, c7, m8, d9, f10, d11, d13]
+
+        self.architecture = [
+        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1)),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
+
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
+
+        Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+
+        Flatten(),
+        Dense(units = 128,activation = 'relu',kernel_initializer='he_normal'),
+        Dropout(0.25),
+        Dense(units = 64,activation = 'relu',kernel_initializer='he_normal'),
+        BatchNormalization(),
+        Dropout(0.25),
+        Dense(units = 32,activation = 'relu',kernel_initializer='he_normal'),
+        Dense(7,activation = 'softmax')
+        ]
+
+       
+       
+        
+
+    
+>>>>>>> b0890fd28073f952d31f8b8ebdbddd4711338ed9
 
     def call(self, x):
         """ Passes input image through the network. """
@@ -152,11 +277,19 @@ class VGGModel(tf.keras.Model):
         # TODO: Write a classification head for our 15-scene classification task.
 
         self.head = [
+<<<<<<< HEAD
             Dropout(rate=0.3),
             Flatten(),
             Dense(units=128, activation='relu'),
             Dense(units=7, activation='softmax')
+=======
+            Flatten(data_format=None), 
+            Dropout(0.4), 
+            Dense(units=100, activation='relu'), 
+            Dense(units=15, activation='softmax')
+>>>>>>> b0890fd28073f952d31f8b8ebdbddd4711338ed9
         ]
+        
 
         # Don't change the below:
         self.vgg16 = tf.keras.Sequential(self.vgg16, name="vgg_base")
