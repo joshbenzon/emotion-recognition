@@ -137,77 +137,38 @@ class YourModel(tf.keras.Model):
     #     self.architecture = [c1, c2, m3, d4, c5,
     #                          m6, c7, m8, d9, f10, d11, d13]
 
-        # self.architecture = [
-        # Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1)),
-        # MaxPool2D(pool_size = 2,strides = 2),
-        # BatchNormalization(),
+        self.architecture = [
+        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1)),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
 
-        # Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        # MaxPool2D(pool_size = 2,strides = 2),
-        # BatchNormalization(),
-        # Dropout(0.25),
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
 
-        # Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        # MaxPool2D(pool_size = 2,strides = 2),
-        # BatchNormalization(),
-        # Dropout(0.25),
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
 
-        # Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu'),
-        # MaxPool2D(pool_size = 2,strides = 2),
-        # BatchNormalization(),
+        Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
 
-        # Flatten(),
-        # Dense(units = 128,activation = 'relu',kernel_initializer='he_normal'),
-        # Dropout(0.25),
-        # Dense(units = 64,activation = 'relu',kernel_initializer='he_normal'),
-        # BatchNormalization(),
-        # Dropout(0.25),
-        # Dense(units = 32,activation = 'relu',kernel_initializer='he_normal'),
-        # Dense(7,activation = 'softmax')
-        # ]
+        Flatten(),
+        Dense(units = 128,activation = 'relu',kernel_initializer='he_normal'),
+        Dropout(0.25),
+        Dense(units = 64,activation = 'relu',kernel_initializer='he_normal'),
+        BatchNormalization(),
+        Dropout(0.25),
+        Dense(units = 32,activation = 'relu',kernel_initializer='he_normal'),
+        Dense(7,activation = 'softmax')
+        ]
+
+       
+       
         
-        # Block 1
-        conv = Conv2D(64, 3, 1, padding="same",
-                   activation="relu", name="block1_conv1")
-        conv_two = Conv2D(64, 3, 1, padding="same",
-                   activation="relu", name="block1_conv2")
-        maxp = MaxPool2D(2, name="block1_pool")
-            # Block 2
-        conv_three = Conv2D(128, 3, 1, padding="same",
-                   activation="relu", name="block2_conv1")
-        conv_four = Conv2D(128, 3, 1, padding="same",
-                   activation="relu", name="block2_conv2")
-        maxp_two = MaxPool2D(2, name="block2_pool") 
-        
-            # Block 3
-        conv_five = Conv2D(256, 3, 1, padding="same",
-                   activation="relu", name="block3_conv1")
-        conv_six = Conv2D(256, 3, 1, padding="same",
-                   activation="relu", name="block3_conv2")
-        maxp_three = MaxPool2D(2, name="block3_pool")
-            # Block 4
-        conv_eight = Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block4_conv1")
-        conv_nine = Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block4_conv2")
-        maxp_four = MaxPool2D(2, name="block4_pool")
-            # Block 5
-        conv_eleven = Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv1")
-        conv_twelve = Conv2D(512, 3, 1, padding="same",
-                   activation="relu", name="block5_conv2")          
-        maxp_five = MaxPool2D(2, name="block5_pool") 
-        flat = tf.keras.layers.Flatten(data_format=None)
-        drop = Dropout(0.4)
-        dense = Dense(units=100, activation='relu')
-        dense_1 = Dense(units=15, activation='softmax')
-
-
-        self.architecture = [conv, conv_two, maxp, 
-        conv_three, conv_four, maxp_two,
-        conv_five, conv_six, maxp_three,
-        conv_eight, conv_nine, maxp_four, 
-        conv_eleven, conv_twelve, maxp_five, drop, flat, dense, dense_1]
 
     
 
@@ -290,11 +251,35 @@ class VGGModel(tf.keras.Model):
         # TODO: Write a classification head for our 15-scene classification task.
 
         self.head = [
-            Dropout(rate=0.5),
-            Flatten(),
-            Dense(units=128, activation='relu'),
-            Dense(units=7, activation='softmax')
+            
+        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1)),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
+
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
+
+        Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+
+        Flatten(),
+        Dense(units = 128,activation = 'relu',kernel_initializer='he_normal'),
+        Dropout(0.25),
+        Dense(units = 64,activation = 'relu',kernel_initializer='he_normal'),
+        BatchNormalization(),
+        Dropout(0.25),
+        Dense(units = 32,activation = 'relu',kernel_initializer='he_normal'),
+        Dense(7,activation = 'softmax')
         ]
+        
 
         # Don't change the below:
         self.vgg16 = tf.keras.Sequential(self.vgg16, name="vgg_base")
