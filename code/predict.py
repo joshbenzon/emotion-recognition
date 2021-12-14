@@ -10,6 +10,7 @@ def predict_image(path):
 
     label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
 
+    img = tf.image.rgb_to_grayscale(img)
     img = np.array(img)
     print(img.shape)
 
