@@ -75,5 +75,7 @@ def predict_image(path):  # removed model
     print(label_dict[img_index], '~label~')
 
 
+print("hi")
+
 create_model()
 predict_image("angry.png")
