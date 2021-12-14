@@ -42,7 +42,8 @@ def create_model():
 
 def predict_image(path):
     model = VGGModel()
-    # model.load_weights("vgg.weights.e024-acc0.4742.h5")
+    model.load_model("vgg16_imagenet.h5")
+    model.load_weights("vgg.weights.e024-acc0.4742.h5")
     # model.save_weights("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # print(model)
 
@@ -65,12 +66,7 @@ def predict_image(path):
 
     result = model.predict(img)
 
-    print("predick")
-
     result = list(result[0])
-
-    print(result, "~result~")
-    print(len(result), "~result shape~")
 
     img_index = result.index(max(result))
     print(label_dict[img_index], '~label~')
