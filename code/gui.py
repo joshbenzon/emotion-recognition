@@ -1,15 +1,23 @@
 from camera import detectEmotion
 from tkinter import *
-from PIL import ImageTk, Image
 import os
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
 
+image_name = "face.jpg"
+
 
 class GUI:
+    """
+    TKinter GUI for Inside Out Project.
+    """
+
     def __init__(self, master):
+        """
+        Initializes the GUI, a take picture button, and a quit button.
+        """
         self.master = master
         master.title("Inside Out Emotion Recognition")
 
@@ -29,14 +37,17 @@ class GUI:
         self.output.pack()
 
     def getEmotion(self):
+        """
+        Takes a picture of the user, finds their emotion, and then returns it to them in a text box.
+        """
         self.output.delete("1.0", END)
-        emotion = detectEmotion()
+        emotion = detectEmotion(image_name)
         self.output.insert(END, emotion)
 
 
-if os.path.exists("image.jpg"):
-    os.remove("image.jpg")
-    os.remove("processed_image.jpg")
+if os.path.exists(image_name):
+    os.remove(image_name)
+    os.remove("processed_" + image_name)
 
 root = Tk()
 
