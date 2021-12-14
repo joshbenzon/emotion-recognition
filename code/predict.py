@@ -14,19 +14,19 @@ os.chdir(dname)
 
 model = VGGModel()
 
-print("Loading Models...")
-model.vgg16 = load_model("vgg.h5")
-model.head = load_model("head.h5")
+# print("Loading Models...")
+# model.vgg16 = load_model("vgg.h5")
+# model.head = load_model("head.h5")
 
 print("Loading Weights...")
 model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
     "checkpoints/vgg_model/121421-151746/vgg.weights.e018-acc0.5242.h5")
 
-# model.compile(
-#     optimizer=model.optimizer,
-#     loss=model.loss_fn,
-#     metrics=["sparse_categorical_accuracy"])
+model.compile(
+    optimizer=model.optimizer,
+    loss=model.loss_fn,
+    metrics=["sparse_categorical_accuracy"])
 
 
 image_path = "angry.png"
