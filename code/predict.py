@@ -42,7 +42,7 @@ def create_model():
 
 def predict_image(path):
     model = create_model()
-    model.load_weights("\121321-205349\vgg.weights.e024-acc0.4742.h5")
+    model.load_weights("vgg.weights.e024-acc0.4742.h5")
     # model.save_weights("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # print(model)
 
