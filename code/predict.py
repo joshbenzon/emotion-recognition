@@ -1,16 +1,23 @@
-def predict_image():
+import tensorflow as tf
+import numpy as np
+from models import VGGModel
+import hyperparameters as hp
+
+def predict_image(path):
+    model = VGGModel
+    data_dir = "\Users\katie\Documents\Classes\cs1430\inside-out\data"
     train_ds = tf.keras.utils.image_dataset_from_directory(
         data_dir,
         validation_split=0.2,
         subset="training",
         seed=123,
-        image_size=(img_height, img_width),
-        batch_size=batch_size)
+        image_size=hp.img_size,
+        batch_size=hp.batch_size)
 
     class_names = train_ds.class_names
 
-    url = "/Users/joshbenzon/Documents/CompSci/cs1430_python/hw5/code/test.JPG"
-    path = tf.keras.utils.get_file(fname="~water~", origin=url)
+    url = path
+    path = tf.keras.utils.get_file(fname="~happy~", origin=url)
 
     img = tf.keras.utils.load_img(path)
 
