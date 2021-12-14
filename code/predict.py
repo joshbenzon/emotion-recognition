@@ -4,7 +4,7 @@ from models import VGGModel
 import hyperparameters as hp
 
 def predict_image(path):
-    model = VGGModel
+    model = VGGModel()
     # model.save("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # print(model)
     img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale = True, target_size=(48, 48))
@@ -20,7 +20,7 @@ def predict_image(path):
     img = np.array(img)
     print("we reshaped")
 
-    result = VGGModel.predict(img)
+    result = model.predict(img)
     result = list(result[0])
 
     print(result)
