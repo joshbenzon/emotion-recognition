@@ -5,29 +5,50 @@ import hyperparameters as hp
 
 def predict_image(path):
     model = VGGModel
-    data_dir = "\Users\katie\Documents\Classes\cs1430\inside-out\data"
-    train_ds = tf.keras.utils.image_dataset_from_directory(
-        data_dir,
-        validation_split=0.2,
-        subset="training",
-        seed=123,
-        image_size=hp.img_size,
-        batch_size=hp.batch_size)
+    img = tf.keras.preprocessing.image.load_img(path)
+    print("loaded image in yay")
 
-    class_names = train_ds.class_names
+    label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
 
-    url = path
-    path = tf.keras.utils.get_file(fname="~happy~", origin=url)
+    img = np.array(img)
+    print(img.shape)
 
-    img = tf.keras.utils.load_img(path)
+    img = np.expand_dims(img, axis=0)
+    print(img.shape)
+    img = img.reshape(1, 48, 48, 1)
 
-    img_array = tf.keras.utils.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
+    result = model.predict(img)
+    result = list(result[0])
 
-    predictions = model.predict(img_array)
-    score = tf.nn.softmax(predictions[0])
+    print(result)
 
-    print("This image msot loikely belongs to {} with a {:.2f} percent confidence."
-          .format(class_names[np.argmax(score)], 100 * np.max(score)))
+    img_index = result.index(max(result))
+    print(label_dict[img_index])
 
-predict_image("code\happy.jpg")
+    # model = VGGModel
+    # data_dir = "\katie\Documents\Classes\cs1430\inside-out\data"
+    # train_ds = tf.keras.utils.image_dataset_from_directory(
+    #     data_dir,
+    #     validation_split=0.2,
+    #     subset="training",
+    #     seed=123,
+    #     image_size=hp.img_size,
+    #     batch_size=hp.batch_size)
+
+    # class_names = train_ds.class_names
+
+    # url = path
+    # path = tf.keras.utils.get_file(fname="~happy~", origin=url)
+
+    # img = tf.keras.utils.load_img(path)
+
+    # img_array = tf.keras.utils.img_to_array(img)
+    # img_array = tf.expand_dims(img_array, 0)
+
+    # predictions = model.predict(img_array)
+    # score = tf.nn.softmax(predictions[0])
+
+    # print("This image msot loikely belongs to {} with a {:.2f} percent confidence."
+    #       .format(class_names[np.argmax(score)], 100 * np.max(score)))
+
+predict_image("happy.png")
