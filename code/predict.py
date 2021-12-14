@@ -21,6 +21,12 @@ model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
     "checkpoints/vgg_model/121421-151746/vgg.weights.e018-acc0.5242.h5", by_name=False)
 
+model.compile(
+    optimizer=model.optimizer,
+    loss=model.loss_fn,
+    metrics=["sparse_categorical_accuracy"])
+
+
 image_path = "angry.png"
 
 image = tf.keras.preprocessing.image.load_img(image_path)
