@@ -35,7 +35,7 @@ model.compile(
     metrics=["sparse_categorical_accuracy"])
 
 
-image_path = "angry.png"
+image_path = "processed_face.png"
 
 print("Loading in Image...")
 img = image.load_img(image_path, target_size=(224, 224))
