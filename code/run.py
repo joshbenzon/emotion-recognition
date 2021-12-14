@@ -24,8 +24,6 @@ from skimage.segmentation import mark_boundaries
 from matplotlib import pyplot as plt
 import numpy as np
 
-import predict.py as pre
-
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
@@ -36,15 +34,6 @@ def parse_args():
         description="Let's train some neural nets!",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
-        '--predict',
-        requried=True,
-        choices=[True, False]
-    )
-    parser.add_argument(
-        "--path",
-        required=False,
-    )
-    parser.add_argument(
         '--task',
         required=True,
         choices=['1', '3'],
@@ -52,7 +41,7 @@ def parse_args():
         training from scratch (1), or fine tuning VGG-16 (3).''')
     parser.add_argument(
         '--data',
-        default='..' + os.sep + 'data' + os.sep,
+        default='..'+os.sep+'data'+os.sep,
         help='Location where the dataset is stored.')
     parser.add_argument(
         '--load-vgg',
@@ -78,10 +67,6 @@ def parse_args():
         help='''Skips training and evaluates on the test set once.
         You can use this to test an already trained model by loading
         its checkpoint.''')
-    parser.add_argument(
-        '--lime-image',
-        default='test/Bedroom/image_0003.jpg',
-        help='''Name of an image in the dataset to use for LIME evaluation.''')
 
     return parser.parse_args()
 
@@ -160,18 +145,18 @@ def main():
         model = YourModel()
         model(tf.keras.Input(shape=(hp.img_size, hp.img_size, 3)))
         checkpoint_path = "checkpoints" + os.sep + \
-                          "your_model" + os.sep + timestamp + os.sep
+            "your_model" + os.sep + timestamp + os.sep
         logs_path = "logs" + os.sep + "your_model" + \
-                    os.sep + timestamp + os.sep
+            os.sep + timestamp + os.sep
 
         # Print summary of model
         model.summary()
     else:
         model = VGGModel()
         checkpoint_path = "checkpoints" + os.sep + \
-                          "vgg_model" + os.sep + timestamp + os.sep
+            "vgg_model" + os.sep + timestamp + os.sep
         logs_path = "logs" + os.sep + "vgg_model" + \
-                    os.sep + timestamp + os.sep
+            os.sep + timestamp + os.sep
         model(tf.keras.Input(shape=(224, 224, 3)))
 
         # Print summaries for both parts of the model
@@ -200,10 +185,10 @@ def main():
 
     if ARGS.evaluate:
         test(model, datasets.test_data)
-    elif ARGS.predict:
-        pre.predict_image(model, ARGS.path)
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
+
+    model.save('my_model')
 
 
 # Make arguments global
