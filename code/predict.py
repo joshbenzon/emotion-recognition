@@ -18,7 +18,7 @@ def predict_image(path):
     img = np.array(img)
     print("we reshaped")
 
-    result = model.predict(x=img)
+    result = model.predict(img)
     result = list(result[0])
 
     print(result)
