@@ -100,4 +100,4 @@ def predict_image(path):
     # print("This image msot loikely belongs to {} with a {:.2f} percent confidence."
     #       .format(class_names[np.argmax(score)], 100 * np.max(score)))
 
-predict_image("happy.jpg")
+predict_image("happy.png")
