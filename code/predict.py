@@ -8,12 +8,15 @@ def predict_image(path):
     # model.save("\121321-205349\vgg.weights.e024-acc0.4742.h5")
     # print(model)
     img = tf.keras.preprocessing.image.load_img(path, color_mode="grayscale", grayscale = True, target_size=(48, 48))
-    img = img.astype('float')
+
     print("loaded image in yay")
 
     label_dict = {0:'Angry',1:'Disgust',2:'Fear',3:'Happy',4:'Neutral',5:'Sad',6:'Surprise'}
     img = np.array(img)
     print(img.shape)
+
+    thing = tf.convert_to_tensor(img, dtype=tf.int8)
+    img = tf.image.convert_image_dtype(thing, dtype=tf.float32)
 
     img = np.expand_dims(img, axis=0)
     print(img.shape)
