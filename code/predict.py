@@ -43,9 +43,16 @@ img_array = image.img_to_array(img)
 img_batch = np.expand_dims(img_array, axis=0)
 # img_preprocessed = preprocess_input(img_batch)
 
-
 print("Predicting Image...")
 prediction = model.predict(img_batch)
+
+label_dict = {0: "Angry", 1: "Disgust", 2: "Fear",
+              3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
+
+prediction_list = list(prediction[0])
+
+img_index = prediction_list.index(max(prediction_list))
+print(label_dict[img_index])
 
 print("Finished!")
 print(prediction)
