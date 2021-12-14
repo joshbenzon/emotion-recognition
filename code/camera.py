@@ -15,9 +15,6 @@ def takePicture():
 
     while True:
         _, frame = cap.read()
-        # height = int(frame.shape[0])
-        # cv2.resize(
-        #     frame, (height, height), interpolation=cv2.INTER_AREA)
         cv2.imshow("Frame", frame)
 
         key = cv2.waitKey(1)
@@ -30,7 +27,7 @@ def takePicture():
     cap.release()
     cv2.destroyAllWindows()
 
-    img = Image.open("image.jpg").convert("L")
+    # img = Image.open("image.jpg").convert("L")
 
     # img = resize(img, (hp.img_size, hp.img_size))
 
@@ -39,7 +36,7 @@ def takePicture():
     # img = np.array(img)
     # img = resize(img, (48, 48))
     # img = Image.fromarray(img)
-    img.save("image.jpg")
+    # img.save("image.jpg")
 
 
 takePicture()
