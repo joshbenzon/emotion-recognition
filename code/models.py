@@ -137,32 +137,34 @@ class YourModel(tf.keras.Model):
     #     self.architecture = [c1, c2, m3, d4, c5,
     #                          m6, c7, m8, d9, f10, d11, d13]
 
-        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1))
-        MaxPool2D(pool_size = 2,strides = 2)
-        BatchNormalization()
+        self.architecture = [
+        Conv2D(filters = 64,kernel_size = (3,3),padding = 'same',activation = 'relu',input_shape=(48, 48,1)),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
 
-        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu')
-        MaxPool2D(pool_size = 2,strides = 2)
-        BatchNormalization()
-        Dropout(0.25)
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
 
-        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu')
-        MaxPool2D(pool_size = 2,strides = 2)
-        BatchNormalization()
-        Dropout(0.25)
+        Conv2D(filters = 128,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
+        Dropout(0.25),
 
-        Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu')
-        MaxPool2D(pool_size = 2,strides = 2)
-        BatchNormalization()
+        Conv2D(filters = 256,kernel_size = (3,3),padding = 'same',activation = 'relu'),
+        MaxPool2D(pool_size = 2,strides = 2),
+        BatchNormalization(),
 
-        Flatten()
-        Dense(units = 128,activation = 'relu',kernel_initializer='he_normal')
-        Dropout(0.25)
-        Dense(units = 64,activation = 'relu',kernel_initializer='he_normal')
-        BatchNormalization()
-        Dropout(0.25)
-        Dense(units = 32,activation = 'relu',kernel_initializer='he_normal')
+        Flatten(),
+        Dense(units = 128,activation = 'relu',kernel_initializer='he_normal'),
+        Dropout(0.25),
+        Dense(units = 64,activation = 'relu',kernel_initializer='he_normal'),
+        BatchNormalization(),
+        Dropout(0.25),
+        Dense(units = 32,activation = 'relu',kernel_initializer='he_normal'),
         Dense(7,activation = 'softmax')
+        ]
 
     
 
