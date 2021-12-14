@@ -69,10 +69,11 @@ def predict_image(path):
 
     result = list(result[0])
 
-    print(result)
+    print(result, "~result~")
+    print(result.shape, "~result shape~")
 
     img_index = result.index(max(result))
-    print(label_dict[img_index])
+    print(label_dict[img_index], '~label~')
 
     # model = VGGModel
     # data_dir = "\katie\Documents\Classes\cs1430\inside-out\data"
@@ -100,4 +101,4 @@ def predict_image(path):
     # print("This image msot loikely belongs to {} with a {:.2f} percent confidence."
     #       .format(class_names[np.argmax(score)], 100 * np.max(score)))
 
-predict_image("happy.png")
+predict_image("angry.png")
