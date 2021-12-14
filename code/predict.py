@@ -15,8 +15,8 @@ os.chdir(dname)
 model = VGGModel()
 
 print("Loading Models...")
-model.vgg16 = load_model("vgg.h5")
-# model.head = load_model("head.h5")
+# model.vgg16 = load_model("vgg.h5")
+model.head = load_model("head.h5")
 
 # print("Loading Weights...")
 # model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
