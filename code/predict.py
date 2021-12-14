@@ -6,6 +6,7 @@ from tensorflow.keras.layers import \
     Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
 from keras.models import load_model
 import os
+from tensorflow.keras.preprocessing import image
 import numpy as np
 
 abspath = os.path.abspath(__file__)
@@ -37,11 +38,14 @@ model.compile(
 image_path = "angry.png"
 
 print("Loading in Image...")
-image = tf.keras.preprocessing.image.load_img(image_path)
-input_arr = tf.keras.preprocessing.image.img_to_array(image)
-input_arr = np.array([input_arr])  # Convert single image to a batch.
+img = image.load_img(image_path, target_size=(224, 224))
+img_array = image.img_to_array(img)
+img_batch = np.expand_dims(img_array, axis=0)
+# img_preprocessed = preprocess_input(img_batch)
+
 
 print("Predicting Image...")
-predictions = model.predict(input_arr)
+prediction = model.predict(img_batch)
 
 print("Finished!")
+print("Prediction = " + prediction)
