@@ -9,8 +9,8 @@ from tensorflow.keras.layers import \
 def create_model():
     model = tf.keras.Sequential()
 
-    input_shape = (48, 48, 1)
-    model.build(input_shape)
+    # input_shape = (1, 48, 48, 1)
+    # model.build(input_shape)
 
     model.add(Conv2D(64, 3, 1, padding="same", activation="relu", name="block1_conv1"))
     model.add(Conv2D(64, 3, 1, padding="same", activation="relu", name="block1_conv2"))
@@ -40,9 +40,13 @@ def create_model():
 
 def predict_image(path):  # removed model
     model = VGGModel()
-    model.built = True
 
     # model = tf.keras.models.load_model('new_model')
+
+    input_shape = (1, 48, 48, 1)
+    model.build(input_shape)
+    # model.built = True
+
     model.vgg16.load_weights("vgg16_imagenet.h5")
     model.head.load_weights("121321-205349/vgg.weights.e024-acc0.4742.h5")
 
@@ -77,5 +81,5 @@ def predict_image(path):  # removed model
 
 print("hi")
 
-# create_model()
+create_model()
 predict_image("angry.png")
