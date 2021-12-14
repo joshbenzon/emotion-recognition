@@ -188,7 +188,8 @@ def main():
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
 
-    model.save('my_model.h5')
+    model.vgg16.save('vgg.h5')
+    model.head.save('head.h5')
     print("Sucess!")
 
 
