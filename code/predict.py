@@ -4,6 +4,7 @@ from models import YourModel, VGGModel
 import hyperparameters as hp
 from tensorflow.keras.layers import \
     Conv2D, MaxPool2D, Dropout, Flatten, Dense, ZeroPadding2D, BatchNormalization
+from keras.models import load_model
 import os
 import numpy as np
 
@@ -13,8 +14,8 @@ os.chdir(dname)
 
 model = VGGModel()
 
-model.vgg16.load_model("vgg.h5")
-model.head.load_model("head.h5")
+model.vgg16 = load_model("vgg.h5")
+model.head = load_model("head.h5")
 
 model.vgg16.load_weights("vgg16_imagenet.h5", by_name=True)
 model.head.load_weights(
