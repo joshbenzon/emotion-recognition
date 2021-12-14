@@ -74,4 +74,6 @@ def predict_image(path):  # removed model
     img_index = result.index(max(result))
     print(label_dict[img_index], '~label~')
 
+
+create_model()
 predict_image("angry.png")
