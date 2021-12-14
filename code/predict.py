@@ -73,5 +73,5 @@ def predict_image(path):  # removed model
 
 print("hi")
 
-# create_model()
+create_model()
 predict_image("angry.png")
