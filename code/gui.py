@@ -1,12 +1,7 @@
 from camera import detectEmotion
 from tkinter import *
-import os
 
-
-abspath = os.path.abspath(__file__)
-dname = os.path.dirname(abspath)
-os.chdir(dname)
-
+# File Path for Saving Images
 image_name = "face.jpg"
 
 
@@ -46,11 +41,7 @@ class GUI:
         self.output.insert(END, emotion)
 
 
-if os.path.exists(image_name):
-    os.remove(image_name)
-    os.remove("processed_" + image_name)
-
+# Runs the GUI
 root = Tk()
-
 gui = GUI(root)
 root.mainloop()

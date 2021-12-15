@@ -1,8 +1,6 @@
 import tensorflow as tf
 import numpy as np
 from models import VGGModel
-import hyperparameters as hp
-from keras.models import load_model
 import os
 from tensorflow.keras.preprocessing import image
 import numpy as np
@@ -12,6 +10,7 @@ def predict(image_path):
     """
     Predicts emotion of an image 
     """
+    # Changes execution directory to the folder the file is in.
     abspath = os.path.abspath(__file__)
     dname = os.path.dirname(abspath)
     os.chdir(dname)
@@ -39,6 +38,7 @@ def predict(image_path):
     print("Predicting Image...")
     prediction = model.predict(img_batch)
 
+    # Labels for each Emotion.
     label_dict = {0: "Angry", 1: "Disgust", 2: "Fear",
                   3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
     prediction_list = list(prediction[0])
@@ -46,6 +46,9 @@ def predict(image_path):
 
     print(str(label_dict[img_index]) + " with " +
           str(prediction_list[img_index]) + " accuracy.")
+
+    print("Overall distribution:")
+    print(prediction_list)
 
     print("Finished!")
     return label_dict[img_index]

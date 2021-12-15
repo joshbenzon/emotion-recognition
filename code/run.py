@@ -188,15 +188,9 @@ def main():
     else:
         train(model, datasets, checkpoint_path, logs_path, init_epoch)
 
-<<<<<<< HEAD
     model.vgg16.save('vgg.h5')
     model.head.save('head.h5')
     print("Sucess!")
-=======
-    # NEW
-    # model.save('my_model.h5')
-    print("Success!")
->>>>>>> 153ed45a4e8915ed09e0e6998501ff853e0c9d01
 
 
 # Make arguments global

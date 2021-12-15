@@ -34,9 +34,7 @@ def findFace(image_name):
     """
     Finds the users face in the picture that they take.
     """
-
     cascPath = "haarcascade_frontalface_default.xml"
-
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     image = cv2.imread(image_name)
@@ -53,7 +51,6 @@ def findFace(image_name):
     print("Found {0} faces!".format(len(faces)))
 
     x, y, w, h = faces[0]
-
     formatImage(x, y, w, h, image_name)
 
 
@@ -63,8 +60,8 @@ def formatImage(x, y, w, h, image_name):
     """
     image = Image.open(image_name).convert("L")
     image = image.crop((x, y, x+w, y+h))
-    image.thumbnail((hp.img_size, hp.img_size), Image.ANTIALIAS)
-    image.save('processed_' + image_name, quality=95)
+    image.thumbnail((hp.img_size, hp.img_size))
+    image.save('processed_' + image_name, quality=100, subsampling=0)
 
 
 def detectEmotion(image_name):
@@ -73,7 +70,5 @@ def detectEmotion(image_name):
     """
     takePicture(image_name)
     findFace(image_name)
-    # Can't run the first line locally without tensorflow, so use second instead
-    # emotion = predict(image_name)
-    emotion = "Happy"
+    emotion = predict(image_name)
     return emotion

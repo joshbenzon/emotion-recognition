@@ -164,11 +164,7 @@ class VGGModel(tf.keras.Model):
                    activation="relu", name="block5_conv2"),
             Conv2D(512, 3, 1, padding="same",
                    activation="relu", name="block5_conv3"),
-            MaxPool2D(2, name="block5_pool"),
-            Dropout(rate=0.3),
-            Flatten(),
-            Dense(units=128, activation='relu'),
-            Dense(units=7, activation='softmax')
+            MaxPool2D(2, name="block5_pool")
         ]
 
         # TODO: Make all layers in self.vgg16 non-trainable. This will freeze the
