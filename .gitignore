@@ -11,3 +11,5 @@ results/*
 *.fdb_latexmk
 *.aux
 *.zip
+**/face.jpg
+**/processed_face.jpg
