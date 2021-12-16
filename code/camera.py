@@ -70,5 +70,6 @@ def detectEmotion(image_name):
     """
     takePicture(image_name)
     findFace(image_name)
-    emotion = predict(image_name)
+    emotion = predict("processed_" + image_name)
+    # emotion = "N/A"
     return emotion
