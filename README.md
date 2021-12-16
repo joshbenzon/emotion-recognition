@@ -12,8 +12,8 @@ The architecture we used to train the algorithm uses the pretrained model VGG16,
 
 1. Dropout(0.3)
 2. Flatten()
-3. Dense(128)
-4. Dense(7)
+3. Dense(128, 'relu')
+4. Dense(7, 'softmax')
 
 We also used specific preprocessing on our images in order to get our accuracy as high as possible. This consisted of the following arguments to the ImageDataGenerator function when reading in training images:
 
@@ -22,7 +22,7 @@ We also used specific preprocessing on our images in order to get our accuracy a
 - height_shift_range = 0.1
 - horizontal_flip = True
 
-Using VGG16 and our custom head, as well as the custom preprocessing, we were able to get our accuracy on the validation dataset up to 52.46%, which we consider a sucess.
+Using VGG16 and our custom head, as well as the custom preprocessing, we were able to get our accuracy on the validation dataset up to 52.46%, which we consider a success.
 
 ## How to Use
 
@@ -30,7 +30,7 @@ In order to run any parts of the program, make sure that you are running Inside 
 
 #### Training the Model
 
-In order to train the model, run the command `python3 run.py --task 3` from the code directory. This will start training the model. The model's three best outputs will be saves in the `checkpoints/vgg_model` folder.
+In order to train the model, run the command `python3 run.py` from the code directory. This will start training the model. The model's three best outputs will be saves in the `checkpoints/vgg_model` folder.
 
 #### Using the GUI
 

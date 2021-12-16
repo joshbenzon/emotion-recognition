@@ -8,7 +8,7 @@ import numpy as np
 
 def predict(image_path):
     """
-    Predicts emotion of an image 
+    Predicts emotion of an image.
     """
     # Changes execution directory to the folder the file is in.
     abspath = os.path.abspath(__file__)
